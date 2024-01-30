@@ -62,6 +62,7 @@ const db_conf = {
   database: 'mydb2',
 };
 
+
 const db_conf2 ={
   host :'localhost',
   user :'root',
