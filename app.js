@@ -65,7 +65,8 @@ const db_conf = {
 const db_conf2 ={
   host :'localhost',
   user :'root',
-  password :'20021225',
+  //password :'20021225',
+  password :'ha031008',
   database :'mydb2',
 }
   //shimamura_password

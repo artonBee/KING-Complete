@@ -120,11 +120,12 @@
    const mysql_setting = {
      host: 'localhost',
      user: 'root',
-     password: '20010426',
+     //password: '20010426',
+     password: 'ha031008',
      database: 'mydb2'
    }
    
-   //password: 'ha031008',
+   
    //password: '20021225',
    //password: '20010426',
    //password: 'matosui122083',

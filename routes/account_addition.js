@@ -11,7 +11,7 @@ router.get("/", (req, res)=> {
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'matosui122083',
+    password: 'ha031008',
     database: 'mydb2'
   });
   //password
