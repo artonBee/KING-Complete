@@ -194,8 +194,8 @@
     })
 
      socket.on('filedata',(data) =>{
-      var q1 = "insert into mondai_LIST values(?,?,?,?,?,?,?,?,?,?,?);"
-      var q2 = "select MIN(mon_ID  + 1) AS mon_ID from mondai_LIST where (mon_ID + 1) NOT IN (SELECT mon_ID from mondai_LIST);"
+      var q1 = "insert into question_table values(?,?,?,?,?,?,?,?,?,?,?);"
+      var q2 = "select MIN(mon_ID  + 1) AS mon_ID from question_table where (mon_ID + 1) NOT IN (SELECT mon_ID from question_table);"
       var q3 = "select MIN(seikai_ID  + 1) AS seikai_ID from seikai_LIST where (seikai_ID + 1) NOT IN (SELECT seikai_ID from seikai_LIST);"
       var q4 = "insert into seikai_LIST values(?,?,?);"
       var da = "a";
@@ -251,8 +251,8 @@
     
    //myoujin
    /* socket.on('montuika',(array)=>{
-     var q1 = "insert into mondai_LIST values(?,?,?,?,?,?,?,?,?,?,?);"
-     var q2 = "select MIN(mon_ID  + 1) AS mon_ID from mondai_LIST where (mon_ID + 1) NOT IN (SELECT mon_ID from mondai_LIST);"
+     var q1 = "insert into question_table values(?,?,?,?,?,?,?,?,?,?,?);"
+     var q2 = "select MIN(mon_ID  + 1) AS mon_ID from question_table where (mon_ID + 1) NOT IN (SELECT mon_ID from question_table);"
      var q3 = "select MIN(seikai_ID  + 1) AS seikai_ID from seikai_LIST where (seikai_ID + 1) NOT IN (SELECT seikai_ID from seikai_LIST);"
      var q4 = "insert into seikai_LIST values(?,?,?);"
      var da = "a";
@@ -310,7 +310,7 @@
     socket.on('syokika',()=>{
        var sql1="truncate table time_LIST;"
        var sql2="truncate table kaitou_LIST;"
-       var sql3="update mondai_LIST set sentaku= 0 where sentaku = 1"
+       var sql3="update question_table set sentaku= 0 where sentaku = 1"
        var sql4 = "truncate table monhan_LIST";
        connection.query(sql1,(err,result1,fields)=>{
         if(err){
@@ -410,8 +410,8 @@
       
         if(mondai != ''){
           var pool = poolCluster.of('MASTER');
-          var mondai_select = "select mon_ID,mondaibun from mondai_LIST where sentaku = 1;"
-          let mondai_sentaku = "update mondai_LIST set sentaku = '1' where name = ?;"
+          var mondai_select = "select mon_ID,mondaibun from question_table where sentaku = 1;"
+          let mondai_sentaku = "update question_table set sentaku = '1' where name = ?;"
           let sql3 = "insert into monhan_LIST values(?,?);"
           let sql4 = "select han_ID from hankeisiki_LIST where han_keisiki = ?;"
           pool.getConnection(function(err,connection){
@@ -583,8 +583,8 @@
   
      
      socket.on('montuika',(array)=>{
-      var q1 = "insert into mondai_LIST values(?,?,?,?,?,?,?,?,?,?,?);"
-      var q2 = "select MIN(mon_ID  + 1) AS mon_ID from mondai_LIST where (mon_ID + 1) NOT IN (SELECT mon_ID from mondai_LIST);"
+      var q1 = "insert into question_table values(?,?,?,?,?,?,?,?,?,?,?);"
+      var q2 = "select MIN(mon_ID  + 1) AS mon_ID from question_table where (mon_ID + 1) NOT IN (SELECT mon_ID from question_table);"
       var q3 = "select MIN(seikai_ID  + 1) AS seikai_ID from seikai_LIST where (seikai_ID + 1) NOT IN (SELECT seikai_ID from seikai_LIST);"
       var q4 = "insert into seikai_LIST values(?,?,?);"
       var da = "a";
@@ -613,10 +613,11 @@
       }
     })
 
+    /*
      socket.on('kiroku',(m1,kaitou1) =>{
   
-      let monname = 'select m.mon_ID,s.seikai from mondai_LIST m ,seikai_LIST s where sentaku = 1 and m.mon_ID = s.mon_ID;'
-      let seikai = 'select kaitou from mondai_LIST where sentaku = 1;'
+      let monname = 'select m.mon_ID,s.seikai from question_table m ,seikai_LIST s where sentaku = 1 and m.mon_ID = s.mon_ID;'
+      let seikai = 'select kaitou from question_table where sentaku = 1;'
       let tuika = 'insert into kaitou_LIST values(?,?,?,?);'
       let userIDSELECT = 'select user_ID from users where username = ?;'
       let update1 = "update kaitou_LIST set user_ID = ? where user_ID = '9999';"
@@ -662,12 +663,13 @@
         connection.release();
       })
      })
-  });*/
+  });
 
         })
       })
     })
-    
+    */
+
      socket.on('clear',()=>{
         var userID = socket.request.session.user.username;
         var sql1="select room_ID from room_table where user_ID =?;"
@@ -1273,6 +1275,7 @@
                 console.log(err);
               }
               var question = result2[0].question_ID;
+              console.log("kiroku_question" + question);
               callback(null,question);
             })
           },
@@ -1282,6 +1285,7 @@
               if(err){
                 console.log(err);
               }
+              //
               var correct_data = result3[0].answer;
               console.log(correct_data);
               callback(null,correct_data,question);

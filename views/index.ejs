@@ -26,28 +26,44 @@
       var hyoujiindex = 0;
       var timer = document.getElementById('mytime');
       var timer2 = timer.innerText;
-      var timer3 = parseInt(timer2/60,10);
-      var timer4 = timer2%60
-      var countdownid1 = setInterval(function(){
-            timer4 --;
-            re.innerText=timer3;
-            re3.innerText = timer4;
-            if(timer3 >0 && timer4 == 0){
-                timer3 --;
-                timer4 = 59;
-            }
-            if(timer3 == 0 && timer4 == 0){
-                clearInterval(countdownid1);
-            }
+      //表示の時間合わせ
+      if(timer2 <= 3){
+        timer2 = 0;
+      }else{
+        timer2 = timer2 - 3;
+      }
+      var minutes = parseInt(timer2/60,10);
+      var seconds = timer2%60;
+
+      re.innerText=minutes;
+      re3.innerText = seconds;
+
+      //カウンドダウン開始
+      if(minutes == 0 && seconds == 0){
+        re.innerText=minutes;
+        re3.innerText = seconds;
+      }else{
+        var countdownid = setInterval(function(){
+        if(minutes != 0 && seconds == 0){
+          minutes --;
+          seconds = 59;
+        }else{
+          seconds --; 
+        }
+        re.innerText=minutes;
+        re3.innerText = seconds;
+        if(minutes == 0 && seconds == 0){
+          clearInterval(countdownid);
+        }
         }, 1000);
+      }
 
         socket.on('hyouji',function(de){
           window.location.href ='/hyou3?data=' + encodeURIComponent(de);
         })
         
         socket.on('result_display2',function(data){
-          console.log(data.username);
-          //window.location.href='/hyou4';
+          window.location.href='/hyou4';
         })
     </script>
   </body>

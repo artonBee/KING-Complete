@@ -26,7 +26,6 @@
                 remain2.innerText = seconds;
                 if(minites == 0 && seconds == 0){
                     clearInterval(countdownid);
-                    //socket.emit('owa2'); -> 自動化するならこれがいる
                 }
             }, 1000);
             }

@@ -58,7 +58,7 @@ var app = express();
 const db_conf = {
   host: 'localhost',
   user: 'root',
-  password: '20010426',
+  password: 'ha031008',
   database: 'mydb2',
 };
 
@@ -108,9 +108,7 @@ var options = {
   host: 'localhost',
   user: 'root',
 
-  password: 'Bonobo09040425',
-
-  password: '20010426',
+  password: 'ha031008',
 
   database: 'mydb2'
 };
